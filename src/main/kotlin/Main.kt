@@ -3,13 +3,18 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.MenuBar
@@ -25,9 +30,14 @@ fun App(
     outFile: String,
 ) {
     var messages by remember { mutableStateOf<List<Message>>(emptyList()) }
+    var scrollToIndex by remember { mutableStateOf<Int?>(null) }
     MaterialTheme {
-        Column {
-            Text("JSON 파일을 열어서 SQLite로 변환해보세요!")
+        Column(modifier = Modifier.padding(10.dp)) {
+            Text(
+                "JSON 파일을 열어서 SQLite로 변환해보세요!",
+                modifier = Modifier.padding(10.dp),
+                style = MaterialTheme.typography.h5,
+            )
             Row(
                 horizontalArrangement = Arrangement.spacedBy(5.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -59,12 +69,58 @@ fun App(
                     Text("파일 로드하기")
                 }
             }
+            Row {
+                var searchText by remember { mutableStateOf("") }
+                SearchView(
+                    searchText = searchText,
+                    onSearchTextChange = { searchText = it },
+                    onSearch = { searchText ->
+                        val index = messages.indexOfFirst {
+                            it.content.body.contains(searchText)
+                        }
+                        scrollToIndex = index
+                    })
+                Button(onClick = {
+                    val currentSearchIndex = scrollToIndex ?: 0
+                    val nextIndex = messages.subList(currentSearchIndex + 1, messages.size).indexOfFirst {
+                        it.content.body.contains(searchText)
+                    }
+
+                    if (nextIndex != -1) {
+                        // 실제 인덱스는 현재 인덱스 + 찾은 인덱스 + 1
+                        scrollToIndex = currentSearchIndex + nextIndex + 1
+                    } else {
+                        // 더 이상 일치하는 항목이 없을 경우 처리
+                        // TODO: 메시지 박스로 처리
+                        println("더 이상 일치하는 항목이 없습니다.")
+                    }
+                }) {
+                    Text("다음 찾기")
+                }
+            }
             // 실제 리스트뷰, 테이블 뷰
             // 열린파일이 SQLite 파일일 경우, 테이블 뷰 보여줌
-            ChatView(messages)
+            ChatView(messages, scrollToIndex)
         }
     }
 }
+
+@Composable
+fun SearchView(
+    searchText: String,
+    onSearchTextChange: (String) -> Unit,
+    onSearch: (String) -> Unit
+) {
+    TextField(
+        value = searchText,
+        onValueChange = { onSearchTextChange(it) },
+        label = { Text("검색") },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
+        keyboardActions = KeyboardActions(onSearch = { onSearch(searchText) })
+    )
+}
+
 
 @Composable
 fun TableViewHeader(titles: List<Pair<String, Dp>>) {
@@ -102,9 +158,14 @@ fun <T> TableView(
     modifiers: (T, Int) -> Modifier = { _, _ -> Modifier },
     onItemLongClick: (T) -> Unit = {},
     onItemClick: (T) -> Unit = {},
-    column: (item: T, col: Int) -> String
+    column: (item: T, col: Int) -> String,
+    scrollToIndex: Int? = null,
 ) {
-    LazyColumn(Modifier.horizontalScroll(rememberScrollState())) {
+    val listState = rememberLazyListState()
+    LazyColumn(
+        Modifier.horizontalScroll(rememberScrollState()),
+        state = listState,
+    ) {
         stickyHeader {
             TableViewHeader(titles)
         }
@@ -128,10 +189,15 @@ fun <T> TableView(
             }
         }
     }
+    LaunchedEffect(scrollToIndex) {
+        scrollToIndex?.let {
+            listState.animateScrollToItem(it)
+        }
+    }
 }
 
 @Composable
-fun ChatView(messages: List<Message>) {
+fun ChatView(messages: List<Message>, scrollToIndex: Int? = null) {
     TableView(
         titles = listOf(
             "writerId" to 100.dp,
@@ -150,6 +216,7 @@ fun ChatView(messages: List<Message>) {
                 else -> ""
             }
         },
+        scrollToIndex = scrollToIndex,
     )
 }
 
@@ -169,6 +236,7 @@ fun main() = application {
         var selectedFile by remember { mutableStateOf("") }
         // change .json to .db
         val outFile = selectedFile.replace(".json", ".db")
+
         MenuBar {
             Menu("파일", mnemonic = 'F') {
                 Item("열기", onClick = {

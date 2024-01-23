@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cc1d6285-c50e-49ff-8346-537ab6170b79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Converter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Converter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/DBLoader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/DBLoader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/JandiClasses.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/JandiClasses.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1706003240522</updated>
-      <workItem from="1706003241616" duration="8358000" />
+      <workItem from="1706003241616" duration="11353000" />
     </task>
     <servers />
   </component>
