@@ -144,7 +144,7 @@ fun ChatView(messages: List<Message>) {
             when (col) {
                 0 -> item.writerId.toString()
                 1 -> item.content.body
-                2 -> item.createdAt
+                2 -> item.createdAt?.toString() ?: ""
                 3 -> item.likedCount.toString()
                 // 추가 컬럼 정의
                 else -> ""

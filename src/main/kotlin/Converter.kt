@@ -11,11 +11,12 @@ fun prepareSchema(
     statement.executeUpdate(
         """
         CREATE TABLE IF NOT EXISTS Message (
-            id INTEGER PRIMARY KEY,
+            base_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER,
             `from` TEXT,
             deleterId INTEGER,
             updateTime INTEGER,
-            linkPreviewId INTEGER,
+            linkPreviewId TEXT,
             status TEXT,
             isFormatted BOOLEAN,
             formatKey TEXT,
@@ -160,28 +161,28 @@ fun convertFile(
     """.trimIndent()
     )
     for (record in json.records) {
-        insertStatement.setLong(1, record.message.id)
-        insertStatement.setString(2, record.message.from)
-        insertStatement.setLong(3, record.message.deleterId ?: -1)
-        insertStatement.setLong(4, record.message.updateTime ?: -1)
-        insertStatement.setLong(5, record.message.linkPreviewId ?: -1)
-        insertStatement.setString(6, record.message.status ?: "")
-        insertStatement.setBoolean(7, record.message.isFormatted)
-        insertStatement.setString(8, record.message.formatKey ?: "")
-        insertStatement.setInt(9, record.message.commentCount)
-        insertStatement.setBoolean(10, record.message.isEdited)
-        insertStatement.setBoolean(11, record.message.isThreaded)
-        insertStatement.setString(12, record.message.updatedAt ?: "")
-        insertStatement.setLong(13, record.message.teamId)
-        insertStatement.setLong(14, record.message.writerId)
-        insertStatement.setString(15, record.message.contentType)
-        insertStatement.setInt(16, record.message.permission)
-        insertStatement.setString(17, record.message.createdAt)
-        insertStatement.setInt(18, record.message.likedCount)
-        insertStatement.setLong(19, record.message.createTime)
-        insertStatement.setBoolean(20, record.message.isStarred)
-        insertStatement.setString(21, record.message.content.body)
-        insertStatement.setString(22, record.message.content.connectInfo.toString())
+        insertStatement.setLong(1, record.message?.id?: -1)
+        insertStatement.setString(2, record.message?.from)
+        insertStatement.setLong(3, record.message?.deleterId ?: -1)
+        insertStatement.setLong(4, record.message?.updateTime ?: -1)
+        insertStatement.setString(5, record.message?.linkPreviewId ?: "")
+        insertStatement.setString(6, record.message?.status ?: "")
+        insertStatement.setBoolean(7, record.message?.isFormatted ?: false)
+        insertStatement.setString(8, record.message?.formatKey ?: "")
+        insertStatement.setInt(9, record.message?.commentCount ?: 0)
+        insertStatement.setBoolean(10, record.message?.isEdited ?: false)
+        insertStatement.setBoolean(11, record.message?.isThreaded ?: false)
+        insertStatement.setString(12, record.message?.updatedAt ?: "")
+        insertStatement.setLong(13, record.message?.teamId?: -1)
+        insertStatement.setLong(14, record.message?.writerId?: -1)
+        insertStatement.setString(15, record.message?.contentType?: "")
+        insertStatement.setInt(16, record.message?.permission?: 0)
+        insertStatement.setString(17, record.message?.createdAt)
+        insertStatement.setInt(18, record.message?.likedCount?: 0)
+        insertStatement.setLong(19, record.message?.createTime?: -1)
+        insertStatement.setBoolean(20, record.message?.isStarred?: false)
+        insertStatement.setString(21, record.message?.content?.body?: "")
+        insertStatement.setString(22, record.message?.content?.connectInfo.toString())
         insertStatement.addBatch()
     }
     insertStatement.executeBatch()

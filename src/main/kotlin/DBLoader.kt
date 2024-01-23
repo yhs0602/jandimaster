@@ -15,7 +15,7 @@ fun getChatData(databasePath: String): List<Message> {
                 from = resultSet.getString("from"),
                 deleterId = resultSet.getLong("deleterId"),
                 updateTime = resultSet.getLong("updateTime"),
-                linkPreviewId = resultSet.getLong("linkPreviewId"),
+                linkPreviewId = resultSet.getString("linkPreviewId"),
                 status = resultSet.getString("status"),
                 isFormatted = resultSet.getBoolean("isFormatted"),
                 formatKey = resultSet.getString("formatKey"),
