@@ -30,8 +30,9 @@ fun prepareSchema(
             createdAt TEXT,
             likedCount INTEGER,
             createTime INTEGER,
-            isStarred BOOLEAN
-            -- 기타 필요한 필드
+            isStarred BOOLEAN,
+            body TEXT,
+            connectInfo TEXT
         );
     """.trimIndent()
     )
@@ -128,9 +129,13 @@ fun convertFile(
             createdAt,
             likedCount,
             createTime,
-            isStarred
+            isStarred,
+            body,
+            connectInfo
         ) VALUES
         (
+            ?,
+            ?,
             ?,
             ?,
             ?,
@@ -175,6 +180,8 @@ fun convertFile(
         insertStatement.setInt(18, record.message.likedCount)
         insertStatement.setLong(19, record.message.createTime)
         insertStatement.setBoolean(20, record.message.isStarred)
+        insertStatement.setString(21, record.message.content.body)
+        insertStatement.setString(22, record.message.content.connectInfo.toString())
         insertStatement.addBatch()
     }
     insertStatement.executeBatch()
