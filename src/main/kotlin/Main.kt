@@ -24,6 +24,7 @@ fun App(
     onSelect: (String) -> Unit,
     outFile: String,
 ) {
+    var messages by remember { mutableStateOf<List<Message>>(emptyList()) }
     MaterialTheme {
         Column {
             Text("JSON 파일을 열어서 SQLite로 변환해보세요!")
@@ -47,10 +48,20 @@ fun App(
                     Text("변환하기")
                 }
             }
-            Text("Converted File: $outFile")
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("SQLite File: $outFile")
+                Button(onClick = {
+                    messages = getChatData(outFile)
+                }) {
+                    Text("파일 로드하기")
+                }
+            }
             // 실제 리스트뷰, 테이블 뷰
             // 열린파일이 SQLite 파일일 경우, 테이블 뷰 보여줌
-            ChatView()
+            ChatView(messages)
         }
     }
 }
@@ -120,40 +131,22 @@ fun <T> TableView(
 }
 
 @Composable
-fun ChatView() {
+fun ChatView(messages: List<Message>) {
     TableView(
         titles = listOf(
-            "이름" to 100.dp,
-            "나이" to 100.dp,
-            "성별" to 100.dp,
+            "writerId" to 100.dp,
+            "content" to 1000.dp,
+            "createdAt" to 100.dp,
+            "likedCount" to 100.dp,
         ),
-        items = listOf(
-            "홍길동" to 20 to "남",
-            "홍길순" to 21 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-            "홍길자" to 22 to "여",
-        ),
+        items = messages,
         column = { item, col ->
             when (col) {
-                0 -> item.first.first
-                1 -> item.first.second.toString()
-                2 -> item.second
+                0 -> item.writerId.toString()
+                1 -> item.content.body
+                2 -> item.createdAt
+                3 -> item.likedCount.toString()
+                // 추가 컬럼 정의
                 else -> ""
             }
         },
@@ -201,3 +194,4 @@ fun main() = application {
         )
     }
 }
+
