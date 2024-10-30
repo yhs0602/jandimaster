@@ -21,6 +21,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import java.io.File
 import javax.swing.JFileChooser
 
 @Composable
@@ -29,6 +30,7 @@ fun App(
     selectedFile: String,
     onSelect: (String) -> Unit,
     outFile: String,
+    exportFileName: String,
     isShowCurlDialog: Boolean,
     showCurlDialog: () -> Unit,
     onCloseDialog: () -> Unit,
@@ -81,6 +83,10 @@ fun App(
             ) {
                 Text("SQLite File: $outFile")
                 Button(onClick = {
+                    if (!File(outFile).exists()) {
+                        errorString = "DB 파일이 존재하지 않습니다."
+                        return@Button
+                    }
                     try {
                         messages = getChatData(outFile)
                     } catch (e: Exception) {
@@ -88,6 +94,25 @@ fun App(
                     }
                 }) {
                     Text("파일 로드하기")
+                }
+                Button(onClick = {
+                    if (!File(outFile).exists()) {
+                        errorString = "DB 파일이 존재하지 않습니다."
+                        return@Button
+                    }
+                    if (messages.isEmpty()) {
+                        errorString = "메시지가 없습니다."
+                        return@Button
+                    }
+                    try {
+                        errorString = "파일 내보내는 중"
+                        exportChatData(exportFileName, messages)
+                        errorString = "파일 내보내기 성공"
+                    } catch (e: Exception) {
+                        errorString = e.stackTraceToString()
+                    }
+                }) {
+                    Text("파일 내보내기")
                 }
             }
             Row {
@@ -311,6 +336,7 @@ fun main() = application {
         var selectedFile by remember { mutableStateOf("") }
         // change .json to .db
         val outFile = selectedFile.replace(".json", ".db")
+        val exportFileName = selectedFile.substringBeforeLast('.') + ".csv"
         var isShowCurlDialog by remember { mutableStateOf(false) }
         MenuBar {
             Menu("파일", mnemonic = 'F') {
@@ -337,6 +363,7 @@ fun main() = application {
                 selectedFile = it
             },
             outFile = outFile,
+            exportFileName = exportFileName,
             isShowCurlDialog = isShowCurlDialog,
             onCloseDialog = {
                 isShowCurlDialog = false

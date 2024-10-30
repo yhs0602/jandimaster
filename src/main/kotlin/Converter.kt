@@ -76,7 +76,11 @@ fun convertFile(
     // read the json file
     val text = File(absFilePath).readText(Charsets.UTF_8)
 //    print("Text: $text")
-    val json = Json.decodeFromString<JsonData>(text)
+    val jsonParser = Json {
+        ignoreUnknownKeys = true
+        explicitNulls = false
+    }
+    val json = jsonParser.decodeFromString<JsonData>(text)
     print(json.entityId)
     print(json.globalLastLinkId)
     print(json.firstLinkId)
@@ -160,7 +164,7 @@ fun convertFile(
     """.trimIndent()
     )
     for (record in json.records) {
-        insertStatement.setLong(1, record.message?.id?: -1)
+        insertStatement.setLong(1, record.message?.id ?: -1)
         insertStatement.setString(2, record.message?.from)
         insertStatement.setLong(3, record.message?.deleterId ?: -1)
         insertStatement.setLong(4, record.message?.updateTime ?: -1)
@@ -172,15 +176,15 @@ fun convertFile(
         insertStatement.setBoolean(10, record.message?.isEdited ?: false)
         insertStatement.setBoolean(11, record.message?.isThreaded ?: false)
         insertStatement.setString(12, record.message?.updatedAt ?: "")
-        insertStatement.setLong(13, record.message?.teamId?: -1)
-        insertStatement.setLong(14, record.message?.writerId?: -1)
-        insertStatement.setString(15, record.message?.contentType?: "")
-        insertStatement.setInt(16, record.message?.permission?: 0)
+        insertStatement.setLong(13, record.message?.teamId ?: -1)
+        insertStatement.setLong(14, record.message?.writerId ?: -1)
+        insertStatement.setString(15, record.message?.contentType ?: "")
+        insertStatement.setInt(16, record.message?.permission ?: 0)
         insertStatement.setString(17, record.message?.createdAt)
-        insertStatement.setInt(18, record.message?.likedCount?: 0)
-        insertStatement.setLong(19, record.message?.createTime?: -1)
-        insertStatement.setBoolean(20, record.message?.isStarred?: false)
-        insertStatement.setString(21, record.message?.content?.body?: "")
+        insertStatement.setInt(18, record.message?.likedCount ?: 0)
+        insertStatement.setLong(19, record.message?.createTime ?: -1)
+        insertStatement.setBoolean(20, record.message?.isStarred ?: false)
+        insertStatement.setString(21, record.message?.content?.body ?: "")
         insertStatement.setString(22, record.message?.content?.connectInfo.toString())
         insertStatement.addBatch()
     }

@@ -13,14 +13,14 @@ data class CreateInfo(
 
 @Serializable
 data class ChatInfo(
-    val eventInfo: KickEvents,
+    val eventInfo: KickEvents?,
     val inviteUsers: List<Long>,
     val createInfo: CreateInfo,
 )
 
 @Serializable
 data class MessageContent(
-    val body: String,
+    val body: String = "",
     val connectInfo: List<Long?>,
 )
 
@@ -42,11 +42,12 @@ class LinkPreview(
 )
 
 data class AttachmentInfo(
-    val height:  Long,
+    val height: Long,
     val width: Long,
     val largeThumbnailUrl: String,
     val mediumThumbnailUrl: String,
 )
+
 @Serializable
 data class AttachmentContent(
     val title: String,
@@ -64,6 +65,7 @@ data class AttachmentContent(
     val filterType: String,
 //    val extraInfo: AttachmentInfo,
 )
+
 @Serializable
 data class Attachment(
     val id: Long,
@@ -108,10 +110,10 @@ data class Message(
     val permission: Int,
     val createdAt: String?,
     val mentions: List<Mention>,
-    val likedCount: Int,
+    val likedCount: Int = 0,
     val createTime: Long,
     val linkPreview: LinkPreview,
-    val isStarred: Boolean,
+    val isStarred: Boolean = false,
 )
 
 @Serializable
@@ -119,7 +121,7 @@ data class ChatRecord(
     val id: Long,
     val fromEntity: Long,
     val teamId: Long,
-    val info: ChatInfo,
+    val info: ChatInfo?,
     val pollId: Long?,
     val feedbackType: String?,
     val feedbackId: Long?,
