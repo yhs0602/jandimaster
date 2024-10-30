@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
@@ -28,16 +29,32 @@ fun App(
     selectedFile: String,
     onSelect: (String) -> Unit,
     outFile: String,
+    isShowCurlDialog: Boolean,
+    showCurlDialog: () -> Unit,
+    onCloseDialog: () -> Unit,
 ) {
     var messages by remember { mutableStateOf<List<Message>>(emptyList()) }
     var scrollToIndex by remember { mutableStateOf<Int?>(null) }
+    var errorString by remember { mutableStateOf("") }
     MaterialTheme {
         Column(modifier = Modifier.padding(10.dp)) {
+            Text("Error: $errorString")
             Text(
                 "JSON 파일을 열어서 SQLite로 변환해보세요!",
                 modifier = Modifier.padding(10.dp),
                 style = MaterialTheme.typography.h5,
             )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("잔디에서 대화 불러오기: 저장 위치: $outFile")
+                Button(onClick = {
+                    showCurlDialog()
+                }) {
+                    Text("잔디에서 JSON 다운로드하기 (작동안함: curl 직접 사용하세요)")
+                }
+            }
             Row(
                 horizontalArrangement = Arrangement.spacedBy(5.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -64,7 +81,11 @@ fun App(
             ) {
                 Text("SQLite File: $outFile")
                 Button(onClick = {
-                    messages = getChatData(outFile)
+                    try {
+                        messages = getChatData(outFile)
+                    } catch (e: Exception) {
+                        errorString = e.stackTraceToString()
+                    }
                 }) {
                     Text("파일 로드하기")
                 }
@@ -102,8 +123,53 @@ fun App(
             // 열린파일이 SQLite 파일일 경우, 테이블 뷰 보여줌
             ChatView(messages, scrollToIndex)
         }
+
+        if (isShowCurlDialog) {
+            CurlDialog(onExecute = { curlCommand, outputPath ->
+                executeCurlCommand(curlCommand, outputPath)
+                onCloseDialog()
+            }, closeDialog = {
+                onCloseDialog()
+            })
+        }
     }
 }
+
+@Composable
+fun CurlDialog(
+    onExecute: (String, String) -> Unit,
+    closeDialog: () -> Unit
+) {
+    var curlCommand by remember { mutableStateOf("") }
+    var outputPath by remember { mutableStateOf("") }
+
+    Dialog(
+        onCloseRequest = { closeDialog() }
+    ) {
+        Column {
+            TextField(
+                value = curlCommand,
+                onValueChange = { curlCommand = it },
+                label = { Text("Curl 명령어") }
+            )
+            Text("출력 파일: $outputPath")
+            Button(onClick = {
+                openSaveDialog {
+                    outputPath = it
+                }
+            }) {
+                Text("저장 위치 선택")
+            }
+            Button(onClick = { onExecute(curlCommand, outputPath) }) {
+                Text("실행")
+            }
+            Button(onClick = { closeDialog() }) {
+                Text("취소")
+            }
+        }
+    }
+}
+
 
 @Composable
 fun SearchView(
@@ -220,6 +286,15 @@ fun ChatView(messages: List<Message>, scrollToIndex: Int? = null) {
     )
 }
 
+fun openSaveDialog(onSelect: (String) -> Unit) {
+    val f = JFileChooser()
+    f.fileSelectionMode = JFileChooser.FILES_ONLY
+    f.addActionListener { e ->
+        println(f.selectedFile.absolutePath)
+        onSelect(f.selectedFile.absolutePath)
+    }
+    f.showSaveDialog(null)
+}
 
 fun openFileDialog(onSelect: (String) -> Unit) {
     val f = JFileChooser()
@@ -236,7 +311,7 @@ fun main() = application {
         var selectedFile by remember { mutableStateOf("") }
         // change .json to .db
         val outFile = selectedFile.replace(".json", ".db")
-
+        var isShowCurlDialog by remember { mutableStateOf(false) }
         MenuBar {
             Menu("파일", mnemonic = 'F') {
                 Item("열기", onClick = {
@@ -245,6 +320,9 @@ fun main() = application {
                     }
                 })
                 Item("저장", onClick = { /* 파일 저장 로직 */ })
+                Item("잔디에서 대화 불러오기", onClick = {
+                    isShowCurlDialog = true
+                })
                 Separator()
                 Item("종료", onClick = { /* 애플리케이션 종료 로직 */ })
             }
@@ -259,6 +337,13 @@ fun main() = application {
                 selectedFile = it
             },
             outFile = outFile,
+            isShowCurlDialog = isShowCurlDialog,
+            onCloseDialog = {
+                isShowCurlDialog = false
+            },
+            showCurlDialog = {
+                isShowCurlDialog = true
+            }
         )
     }
 }

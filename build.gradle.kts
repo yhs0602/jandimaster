@@ -2,7 +2,9 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     kotlin("jvm")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.compose")
+    kotlin("plugin.serialization") version "2.0.20"
 }
 
 group = "com.yhs0602"
@@ -21,9 +23,15 @@ dependencies {
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
     // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
-    implementation("org.xerial:sqlite-jdbc:3.41.2.2")
+    implementation("org.xerial:sqlite-jdbc:3.47.0.0")
     implementation("com.google.code.gson:gson:2.10.1")
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 }
+
+
+
 
 compose.desktop {
     application {
@@ -33,6 +41,9 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "jandi_viewer"
             packageVersion = "1.0.0"
+
+            modules("java.sql")
+            modules("jdk.unsupported")
         }
     }
 }

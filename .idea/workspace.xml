@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc1d6285-c50e-49ff-8346-537ab6170b79" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/CurlCommand.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/JandiClasses.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/JandiClasses.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,17 +57,6 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="compose desktop" type="c8890929:TasksNode$1" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="jandi_viewer" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="jandi_viewer" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -68,8 +67,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -79,9 +78,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2bLnU0u4t4EAKG67i9aP4sPUJ50" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -92,30 +91,38 @@
   "keyToString": {
     "Gradle.Build jandi_viewer.executor": "Run",
     "Gradle.jandi_viewer [checkRuntime].executor": "Run",
+    "Gradle.jandi_viewer [clean].executor": "Run",
+    "Gradle.jandi_viewer [createReleaseDistributable].executor": "Run",
     "Gradle.jandi_viewer [packageDeb].executor": "Run",
     "Gradle.jandi_viewer [packageDmg].executor": "Run",
+    "Gradle.jandi_viewer [packageMsi].executor": "Run",
+    "Gradle.jandi_viewer [packageReleaseDeb].executor": "Run",
     "Gradle.jandi_viewer [packageReleaseDmg].executor": "Run",
     "Gradle.jandi_viewer [packageReleaseMsi].executor": "Run",
     "Gradle.jandi_viewer [package].executor": "Run",
+    "Gradle.jandi_viewer [proguardReleaseJars].executor": "Run",
+    "Gradle.jandi_viewer [runDistributable].executor": "Run",
     "Kotlin.MainKt.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/yanghyeonseo/Developer/jandi_viewer",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "settings.editor.selected.configurable": "project.propCompiler",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.jandi_viewer [packageMsi]">
-    <configuration name="jandi_viewer [createReleaseDistributable]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Kotlin.MainKt">
+    <configuration name="jandi_viewer [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -126,7 +133,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="createReleaseDistributable" />
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -137,7 +144,7 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="jandi_viewer [packageMsi]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="jandi_viewer [packageDmg]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -148,29 +155,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="packageMsi" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="jandi_viewer [packageReleaseDeb]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="packageReleaseDeb" />
+            <option value="packageDmg" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -203,7 +188,7 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="jandi_viewer [packageReleaseMsi]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="jandi_viewer [runDistributable]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -214,7 +199,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="packageReleaseMsi" />
+            <option value="runDistributable" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -225,15 +210,30 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainKt" />
+      <module name="jandi_viewer.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.jandi_viewer [packageMsi]" />
-        <item itemvalue="Gradle.jandi_viewer [createReleaseDistributable]" />
-        <item itemvalue="Gradle.jandi_viewer [packageReleaseDeb]" />
-        <item itemvalue="Gradle.jandi_viewer [packageReleaseMsi]" />
+        <item itemvalue="Kotlin.MainKt" />
         <item itemvalue="Gradle.jandi_viewer [packageReleaseDmg]" />
+        <item itemvalue="Gradle.jandi_viewer [clean]" />
+        <item itemvalue="Gradle.jandi_viewer [runDistributable]" />
+        <item itemvalue="Gradle.jandi_viewer [packageDmg]" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -243,7 +243,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1706003240522</updated>
-      <workItem from="1706003241616" duration="12709000" />
+      <workItem from="1706003241616" duration="13107000" />
+      <workItem from="1706162353216" duration="4739000" />
+      <workItem from="1706679687203" duration="606000" />
+      <workItem from="1730257708675" duration="5681000" />
     </task>
     <servers />
   </component>

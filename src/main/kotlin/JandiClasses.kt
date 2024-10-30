@@ -1,27 +1,35 @@
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class KickEvents(
     val kickedIds: List<Long>,
 )
 
+@Serializable
 data class CreateInfo(
     val members: List<Long>,
     val pg_members: List<Long>,
 )
 
+@Serializable
 data class ChatInfo(
     val eventInfo: KickEvents,
     val inviteUsers: List<Long>,
     val createInfo: CreateInfo,
 )
 
+@Serializable
 data class MessageContent(
     val body: String,
     val connectInfo: List<Long?>,
 )
 
+@Serializable
 data class MessageInfo(
     val mention: List<Long?>
 )
 
+@Serializable
 class LinkPreview(
     val canonicalUrl: String? = null,
     val domain: String? = null,
@@ -39,6 +47,7 @@ data class AttachmentInfo(
     val largeThumbnailUrl: String,
     val mediumThumbnailUrl: String,
 )
+@Serializable
 data class AttachmentContent(
     val title: String,
     val name: String,
@@ -55,12 +64,14 @@ data class AttachmentContent(
     val filterType: String,
 //    val extraInfo: AttachmentInfo,
 )
+@Serializable
 data class Attachment(
     val id: Long,
     val contentType: String,
     val content: AttachmentContent,
 )
 
+@Serializable
 data class Mention(
     val id: Long,
     val type: String,
@@ -68,6 +79,7 @@ data class Mention(
     val length: Int,
 )
 
+@Serializable
 data class Message(
     val content: MessageContent,
     val info: MessageInfo,
@@ -102,6 +114,7 @@ data class Message(
     val isStarred: Boolean,
 )
 
+@Serializable
 data class ChatRecord(
     val id: Long,
     val fromEntity: Long,
@@ -117,6 +130,7 @@ data class ChatRecord(
     val message: Message?
 )
 
+@Serializable
 data class JsonData(
     val entityId: Long,
     val globalLastLinkId: Long,
