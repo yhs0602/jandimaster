@@ -24,7 +24,6 @@ dependencies {
     implementation(compose.desktop.currentOs)
     // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
     implementation("org.xerial:sqlite-jdbc:3.47.0.0")
-    implementation("com.google.code.gson:gson:2.10.1")
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation("org.slf4j:slf4j-api:2.0.16")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")

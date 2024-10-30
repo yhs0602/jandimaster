@@ -1,4 +1,4 @@
-import com.google.gson.Gson
+import kotlinx.serialization.json.Json
 import java.io.File
 import java.sql.Connection
 import java.sql.DriverManager
@@ -73,11 +73,10 @@ fun convertFile(
 ) {
     println("convertFile: $absFilePath")
     // read the json and convert it to a list of objects
-    val gson = Gson()
     // read the json file
     val text = File(absFilePath).readText(Charsets.UTF_8)
 //    print("Text: $text")
-    val json = gson.fromJson(text, JsonData::class.java)
+    val json = Json.decodeFromString<JsonData>(text)
     print(json.entityId)
     print(json.globalLastLinkId)
     print(json.firstLinkId)
