@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc1d6285-c50e-49ff-8346-537ab6170b79" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Exporter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Converter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Converter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/JandiClasses.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/JandiClasses.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +81,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.Build jandi_viewer.executor": "Run",
+    "Gradle.desktop.executor": "Run",
     "Gradle.jandi_viewer [checkRuntime].executor": "Run",
     "Gradle.jandi_viewer [clean].executor": "Run",
     "Gradle.jandi_viewer [createReleaseDistributable].executor": "Run",
@@ -96,6 +94,7 @@
     "Gradle.jandi_viewer [package].executor": "Run",
     "Gradle.jandi_viewer [proguardReleaseJars].executor": "Run",
     "Gradle.jandi_viewer [runDistributable].executor": "Run",
+    "Gradle.jandi_viewer [runReleaseDistributable].executor": "Run",
     "Kotlin.MainKt.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -115,29 +114,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.jandi_viewer [packageReleaseDmg]">
-    <configuration name="jandi_viewer [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.desktop">
     <configuration name="jandi_viewer [packageDmg]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -204,6 +181,28 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="jandi_viewer [runReleaseDistributable]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runReleaseDistributable" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="jandi_viewer.main" />
@@ -213,11 +212,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.jandi_viewer [packageReleaseDmg]" />
-        <item itemvalue="Kotlin.MainKt" />
-        <item itemvalue="Gradle.jandi_viewer [clean]" />
+        <item itemvalue="Gradle.jandi_viewer [runReleaseDistributable]" />
         <item itemvalue="Gradle.jandi_viewer [runDistributable]" />
+        <item itemvalue="Gradle.jandi_viewer [packageReleaseDmg]" />
         <item itemvalue="Gradle.jandi_viewer [packageDmg]" />
+        <item itemvalue="Kotlin.MainKt" />
       </list>
     </recent_temporary>
   </component>
@@ -240,7 +239,8 @@
       <workItem from="1706003241616" duration="13107000" />
       <workItem from="1706162353216" duration="4739000" />
       <workItem from="1706679687203" duration="606000" />
-      <workItem from="1730257708675" duration="8382000" />
+      <workItem from="1730257708675" duration="9040000" />
+      <workItem from="1730542797264" duration="1685000" />
     </task>
     <servers />
   </component>

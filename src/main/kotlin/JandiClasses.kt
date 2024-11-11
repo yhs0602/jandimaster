@@ -2,20 +2,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class KickEvents(
-    val kickedIds: List<Long>,
+    val kickedIds: List<Long> = listOf(),
 )
 
 @Serializable
 data class CreateInfo(
-    val members: List<Long>,
-    val pg_members: List<Long>,
+    val members: List<Long> = listOf(),
+    val pg_members: List<Long> = listOf(),
 )
 
 @Serializable
 data class ChatInfo(
-    val eventInfo: KickEvents?,
-    val inviteUsers: List<Long>,
-    val createInfo: CreateInfo,
+    val eventInfo: KickEvents? = null,
+    val inviteUsers: List<Long> = listOf(),
+    val createInfo: CreateInfo? = null,
 )
 
 @Serializable
